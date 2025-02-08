@@ -15,13 +15,13 @@ namespace crud_test_dotnet.Api.Controllers
         {
             _mediator = mediator;
         }
-        [HttpPost]
+        [HttpPost("CreateCustomer")]
         public async Task<IActionResult> CreateCustomer([FromBody] CreateCustomerCommand command)
         {
             var customer = await _mediator.Send(command);
             return Ok(customer);
         }
-        [HttpPost]
+        [HttpPost("UpdateCustomer")]
         public async Task<IActionResult> UpdateCustomer([FromBody] UpdateCustomerCommand command)
         {
             var customer = await _mediator.Send(command);

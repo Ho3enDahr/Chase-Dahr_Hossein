@@ -9,7 +9,7 @@ namespace crud_test_dotnet.Core.Domain.ValueObjects
         {
             if (string.IsNullOrEmpty(value))
                 throw new ArgumentNullException("phonenumber cannot be empty");
-            if (IsValidPhoneNumber(value))
+            if (!IsValidPhoneNumber(value))
                     throw new ArgumentException("invalid phone number");
             Value = value;
         }
