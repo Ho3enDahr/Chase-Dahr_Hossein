@@ -5,7 +5,7 @@ namespace crud_test_dotnet.Core.Domain.Entities.CustomerManagement
 {
     public class Customer : IAggregateRoot
     {
-        private List<IDomainEvent> _domainEvents = new List<IDomainEvent>();
+        private List<DomainEvent> _domainEvents = new List<DomainEvent>();
         public Guid Id { get;private set; }
         public string FirstName { get;private set; }
         public string LastName { get;private set; }
@@ -14,7 +14,7 @@ namespace crud_test_dotnet.Core.Domain.Entities.CustomerManagement
         public Email Email { get;private set; }
         public BankAccountNumber BankAccountNumber { get;private set; }
 
-        public IReadOnlyList<IDomainEvent> DomainEvents => _domainEvents.AsReadOnly();
+        public IReadOnlyList<DomainEvent> GetEvents => _domainEvents.AsReadOnly();
         public Customer()
         {
             
@@ -29,6 +29,21 @@ namespace crud_test_dotnet.Core.Domain.Entities.CustomerManagement
             Email =new Email(email.Value);
             BankAccountNumber =new BankAccountNumber(bankAccountNumber.Value);
         }
+        public static Customer Create(string firstname,string lastname,string phoneNumber,string email,string bankAccountNumber,DateTime dateOfBirth)
+        {
+            var customer = new Customer()
+            {
+                BankAccountNumber =new BankAccountNumber( bankAccountNumber),
+                DateOfBirth = dateOfBirth,
+                Email = new Email(email),
+                FirstName=firstname,
+                Id = new Guid(),
+                LastName=lastname,
+                PhoneNumber = new PhoneNumber(phoneNumber)
+            };
+            customer.AddEvent(new CustomerCreatedEvent(customer.Id, customer.FirstName, customer.LastName, customer.PhoneNumber.Value, customer.Email.Value, customer.BankAccountNumber.Value));
+            return customer;
+        }
         public void ChangeEmail(string newEmail)
         {
             if (string.IsNullOrEmpty(newEmail))
@@ -36,6 +51,10 @@ namespace crud_test_dotnet.Core.Domain.Entities.CustomerManagement
             Email = new Email(newEmail);
             var customerEmailChangedEvent = new CustomerEmailChangedEvent(Id, Email.Value);
             _domainEvents.Add(customerEmailChangedEvent);
+        }
+        public void AddEvent(DomainEvent @event)
+        {
+            _domainEvents.Add(@event);
         }
     }
 }

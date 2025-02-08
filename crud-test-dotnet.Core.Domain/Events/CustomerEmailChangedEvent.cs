@@ -1,6 +1,6 @@
 ﻿namespace crud_test_dotnet.Core.Domain.Events
 {
-    public class CustomerEmailChangedEvent : IDomainEvent
+    public class CustomerEmailChangedEvent : DomainEvent
     {
         public Guid CustomerId { get;  }
         public string Email { get;  }
