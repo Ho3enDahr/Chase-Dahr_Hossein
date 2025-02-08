@@ -27,7 +27,7 @@ namespace crud_test_dotnet.Api.Controllers
             var customer = await _mediator.Send(command);
             return Ok(customer);
         }
-        [HttpPost]
+        [HttpDelete]
         public async Task<IActionResult> DeletCustomer([FromBody] DeleteCustomerCommand command)
         {
             var customer = await _mediator.Send(command);

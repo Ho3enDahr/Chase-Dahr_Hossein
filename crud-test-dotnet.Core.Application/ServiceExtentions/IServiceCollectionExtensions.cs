@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using crud_test_dotnet.Core.Application.Common.Mapping;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,10 +14,16 @@ namespace crud_test_dotnet.Core.Application.ServiceExtentions
         public static void AddApplicationLayer(this IServiceCollection services)
         {
             services.AddMediatR();
+            services.AddAutoMapper();
+            services.AddAutoMapper(typeof(CustomerProfile));
         }
         private static void AddMediatR(this IServiceCollection services)
-    {
-        services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
-    }
+        {
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
+        }
+        private static void AddAutoMapper(this IServiceCollection services)
+        {
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+        }
     }
 }
