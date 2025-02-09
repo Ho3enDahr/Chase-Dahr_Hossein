@@ -1,8 +1,8 @@
-﻿using crud_test_dotnet.Core.Application.Commands.CustomerManagement.Create;
-using crud_test_dotnet.Core.Application.Commands.CustomerManagement.Update;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using crud_test_dotnet.Core.Application.Customers.Commands;
+using crud_test_dotnet.Core.Application.Customers.Queries;
 
 namespace crud_test_dotnet.Api.Controllers
 {
@@ -28,7 +28,13 @@ namespace crud_test_dotnet.Api.Controllers
             return Ok(customer);
         }
         [HttpDelete]
-        public async Task<IActionResult> DeletCustomer([FromBody] DeleteCustomerCommand command)
+        public async Task<IActionResult> DeleteCustomer([FromBody] DeleteCustomerCommand command)
+        {
+            var customer = await _mediator.Send(command);
+            return Ok(customer);
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetCustomerById([FromBody] GetCustomerByIdQuery command)
         {
             var customer = await _mediator.Send(command);
             return Ok(customer);

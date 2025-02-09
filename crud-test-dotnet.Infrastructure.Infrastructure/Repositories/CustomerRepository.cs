@@ -8,26 +8,36 @@ namespace crud_test_dotnet.Infrastructure.Infrastructure.Repositories
     public class CustomerRepository : ICustomerRepository
     {
         private readonly CustomerDbContext _context;
-        public CustomerRepository(CustomerDbContext context)
+        private readonly IEventStore _eventStore;
+        public CustomerRepository(CustomerDbContext context, IEventStore eventStore)
         {
             _context = context;
+            _eventStore = eventStore;
         }
         public async Task<Customer> AddAsync(Customer customer)
         {
             await _context.Customer.AddAsync(customer);
             await CommitAsync();
+            foreach (var @event in customer.GetEvents())
+            {
+                _eventStore.Save(@event);
+            }
             return customer;
 
         }
 
-        public async Task<bool> DeleteAsync(Guid Id)
+        public async Task<Customer> DeleteAsync(Guid Id)
         {
             var customer = await _context.Customer.FindAsync(Id);
             if (customer == null)
-                return false;
+                throw new Exception("customer not found");
              _context.Customer.Remove(customer);
             var res = await CommitAsync();
-            return  Convert.ToBoolean(res);
+            foreach (var @event in customer.GetEvents())
+            {
+                _eventStore.Save(@event);
+            }
+            return customer;
         }
 
         public  async Task<List<Customer>> GetAllAsync()
@@ -49,6 +59,10 @@ namespace crud_test_dotnet.Infrastructure.Infrastructure.Repositories
         {
             _context.Customer.Update(customer);
             await CommitAsync();
+            foreach (var @event in customer.GetEvents())
+            {
+                _eventStore.Save(@event);
+            }
             return  customer;
         }
         public async Task<int> CommitAsync()

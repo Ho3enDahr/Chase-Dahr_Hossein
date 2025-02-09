@@ -1,4 +1,5 @@
 ﻿using crud_test_dotnet.Core.Application.Common.Mapping;
+using crud_test_dotnet.Core.Application.Customers.Handlers;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;

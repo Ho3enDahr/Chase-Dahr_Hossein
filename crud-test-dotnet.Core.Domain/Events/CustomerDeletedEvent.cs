@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace crud_test_dotnet.Core.Domain.Events
 {
-    public class CustomerCreatedEvent:DomainEvent
+    public class CustomerDeletedEvent : DomainEvent
     {
-        public CustomerCreatedEvent(Guid customerId, string firstname, string lastname, string phonenumer, string email, string bankAccountNumber, DateTime dateOfBirth)
+        public CustomerDeletedEvent(Guid customerId, string firstname, string lastname, string phonenumer, string email, string bankAccountNumber, DateTime dateOfBirth)
         {
             CustomerId = customerId;
             Firstname = firstname;
