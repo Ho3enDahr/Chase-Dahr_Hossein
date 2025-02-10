@@ -9,9 +9,11 @@ namespace crud_test_dotnet.Core.Domain.ValueObjects
         {
             if (string.IsNullOrEmpty(value))
                 throw new ArgumentNullException("bank account number connot be empty");
-            bool validbankAccount = Regex.IsMatch(value, @"[a-zA-Z]{2}[0-9]{2}[a-zA-Z0-9]{4}[0-9]{7}([a-zA-Z0-9]?){0,16}", RegexOptions.IgnoreCase);
+            var BankAccountRegex = new Regex(@"((\\d{4})-){3}\\d{4}");
+            string[] splited = value.ToString().Split('-');
+            bool validbankAccount= splited.All(a => a.Length == 4) && !splited.Any(a => a.Any(b => b < 48 || b > 57));
             if (!validbankAccount)
-                throw new ArgumentException("bank account number is not valid");
+                throw new ArgumentException("invalid bank account number");
             Value = value;
         }
         private BankAccountNumber()

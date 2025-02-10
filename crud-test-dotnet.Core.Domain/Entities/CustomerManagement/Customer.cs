@@ -38,11 +38,11 @@ namespace crud_test_dotnet.Core.Domain.Entities.CustomerManagement
                 DateOfBirth = dateOfBirth,
                 Email = new Email(email),
                 FirstName=firstname,
-                Id = new Guid(),
+                Id = Guid.NewGuid(),
                 LastName=lastname,
                 PhoneNumber = new ValueObjects.PhoneNumber(phoneNumber)
             };
-            customer.AddEvent(new CustomerCreatedEvent(customer.Id, customer.FirstName, customer.LastName, customer.PhoneNumber.Value, customer.Email.Value, customer.BankAccountNumber.Value,customer.DateOfBirth));
+            customer.AddEvent(new CustomerCreatedEvent(customer.Id, customer.FirstName, customer.LastName, customer.PhoneNumber.Value, customer.Email.Value, customer.BankAccountNumber.Value,customer.DateOfBirth), customer.Id);
             return customer;
         }
         public static Customer Update(Guid id,string firstname, string lastname, string phoneNumber, string email, string bankAccountNumber, DateTime dateOfBirth)
@@ -57,7 +57,7 @@ namespace crud_test_dotnet.Core.Domain.Entities.CustomerManagement
                 LastName = lastname,
                 PhoneNumber = new ValueObjects.PhoneNumber(phoneNumber)
             };
-            customer.AddEvent(new CustomerUpdatedEvent(customer.Id, customer.FirstName, customer.LastName, customer.PhoneNumber.Value, customer.Email.Value, customer.BankAccountNumber.Value,customer.DateOfBirth));
+            customer.AddEvent(new CustomerUpdatedEvent(customer.Id, customer.FirstName, customer.LastName, customer.PhoneNumber.Value, customer.Email.Value, customer.BankAccountNumber.Value,customer.DateOfBirth), customer.Id);
             return customer;
         }
         public static Customer Delete(Guid id, string firstname, string lastname, string phoneNumber, string email, string bankAccountNumber, DateTime dateOfBirth)
@@ -72,7 +72,7 @@ namespace crud_test_dotnet.Core.Domain.Entities.CustomerManagement
                 LastName = lastname,
                 PhoneNumber = new ValueObjects.PhoneNumber(phoneNumber)
             };
-            customer.AddEvent(new CustomerDeletedEvent(customer.Id, customer.FirstName, customer.LastName, customer.PhoneNumber.Value, customer.Email.Value, customer.BankAccountNumber.Value, customer.DateOfBirth));
+            customer.AddEvent(new CustomerDeletedEvent(customer.Id, customer.FirstName, customer.LastName, customer.PhoneNumber.Value, customer.Email.Value, customer.BankAccountNumber.Value, customer.DateOfBirth),customer.Id);
             return customer;
         }
         public void ChangeEmail(string newEmail)
@@ -83,8 +83,9 @@ namespace crud_test_dotnet.Core.Domain.Entities.CustomerManagement
             var customerEmailChangedEvent = new CustomerEmailChangedEvent(Id, Email.Value);
             _domainEvents.Add(customerEmailChangedEvent);
         }
-        public void AddEvent(DomainEvent @event)
+        public void AddEvent(DomainEvent @event,Guid aggregateId)
         {
+            @event.AggregateId = aggregateId;
             _domainEvents.Add(@event);
         }
     }

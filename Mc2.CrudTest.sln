@@ -9,13 +9,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrustructure", "Infrustru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{A4AF5A0D-8D21-4BA6-9ADD-E933D3F6ECA8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "crud-test-dotnet.Core.Domain", "crud-test-dotnet.Core.Domain\crud-test-dotnet.Core.Domain.csproj", "{F089B676-9BAD-45B8-97B6-E243BE8741C6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "crud-test-dotnet.Core.Domain", "crud-test-dotnet.Core.Domain\crud-test-dotnet.Core.Domain.csproj", "{F089B676-9BAD-45B8-97B6-E243BE8741C6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "crud-test-dotnet.Core.Application", "crud-test-dotnet.Core.Application\crud-test-dotnet.Core.Application.csproj", "{EE5CE373-FCB9-49C1-829B-1CF501459BB7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "crud-test-dotnet.Core.Application", "crud-test-dotnet.Core.Application\crud-test-dotnet.Core.Application.csproj", "{EE5CE373-FCB9-49C1-829B-1CF501459BB7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "crud-test-dotnet.Infrastructure.Infrastructure", "crud-test-dotnet.Infrastructure.Infrastructure\crud-test-dotnet.Infrastructure.Infrastructure.csproj", "{DCC8931D-B6F5-4F01-840F-CA1E1EE10CF4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "crud-test-dotnet.Infrastructure.Infrastructure", "crud-test-dotnet.Infrastructure.Infrastructure\crud-test-dotnet.Infrastructure.Infrastructure.csproj", "{DCC8931D-B6F5-4F01-840F-CA1E1EE10CF4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "crud-test-dotnet.Api", "crud-test-dotnet.Api\crud-test-dotnet.Api.csproj", "{D14823D4-5D7A-4EAB-9A05-8856E941C184}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "crud-test-dotnet.Api", "crud-test-dotnet.Api\crud-test-dotnet.Api.csproj", "{D14823D4-5D7A-4EAB-9A05-8856E941C184}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chase-Dahr_Hossein.Presentation.Web", "Chase-Dahr_Hossein.Presentation.Web\Chase-Dahr_Hossein.Presentation.Web.csproj", "{A14E0844-CB50-47C2-99C7-C2AB05C436E0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{67B79773-44C3-4797-816F-8FB5A1FA2D46}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest", "UnitTest\UnitTest.csproj", "{0FEB925F-01DC-46AE-9A3B-C42AE4768879}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +45,14 @@ Global
 		{D14823D4-5D7A-4EAB-9A05-8856E941C184}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D14823D4-5D7A-4EAB-9A05-8856E941C184}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D14823D4-5D7A-4EAB-9A05-8856E941C184}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A14E0844-CB50-47C2-99C7-C2AB05C436E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A14E0844-CB50-47C2-99C7-C2AB05C436E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A14E0844-CB50-47C2-99C7-C2AB05C436E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A14E0844-CB50-47C2-99C7-C2AB05C436E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FEB925F-01DC-46AE-9A3B-C42AE4768879}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FEB925F-01DC-46AE-9A3B-C42AE4768879}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FEB925F-01DC-46AE-9A3B-C42AE4768879}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FEB925F-01DC-46AE-9A3B-C42AE4768879}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,6 +62,8 @@ Global
 		{EE5CE373-FCB9-49C1-829B-1CF501459BB7} = {CC8B40AC-8CD6-4DE9-A8D5-BB3C0C558FFD}
 		{DCC8931D-B6F5-4F01-840F-CA1E1EE10CF4} = {5A4DC1E0-DABE-4702-9273-BAE9B8ACECCD}
 		{D14823D4-5D7A-4EAB-9A05-8856E941C184} = {A4AF5A0D-8D21-4BA6-9ADD-E933D3F6ECA8}
+		{A14E0844-CB50-47C2-99C7-C2AB05C436E0} = {A4AF5A0D-8D21-4BA6-9ADD-E933D3F6ECA8}
+		{0FEB925F-01DC-46AE-9A3B-C42AE4768879} = {67B79773-44C3-4797-816F-8FB5A1FA2D46}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4B5A26C9-68C1-49D9-9F32-AF907A1730C2}

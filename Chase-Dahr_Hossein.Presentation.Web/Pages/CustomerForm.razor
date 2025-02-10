@@ -1,0 +1,73 @@
+﻿@page "/customers/create"
+@page "/customers/edit/{id:guid}"
+@using Chase_Dahr_Hossein.Presentation.Web.Models;
+@using Chase_Dahr_Hossein.Presentation.Web.Services;
+@inject CustomerService CustomerService
+@inject NavigationManager Navigation
+
+<h3>@(customer.Id == Guid.Empty ? "Add Customer" : "Edit Customer")</h3>
+
+<EditForm Model="customer" OnValidSubmit="SaveCustomer">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="mb-3">
+        <label class="form-label">First Name:</label>
+        <InputText class="form-control" @bind-Value="customer.FirstName" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Last Name:</label>
+        <InputText class="form-control" @bind-Value="customer.LastName" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Date of Birth:</label>
+        <InputDate class="form-control" @bind-Value="customer.DateOfBirth" />
+        <ValidationMessage For="@(() => customer.DateOfBirth)" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Email:</label>
+        <InputText class="form-control" @bind-Value="customer.Email" />
+        <ValidationMessage For="@(() => customer.Email)" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Phone:</label>
+        <InputText class="form-control" @bind-Value="customer.PhoneNumber" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Bank Account:</label>
+        <InputText class="form-control" @bind-Value="customer.BankAccountNumber" />
+        <ValidationMessage For="@(() => customer.BankAccountNumber)" />
+    </div>
+    <button type="submit" class="btn btn-success">Save</button>
+    <button class="btn btn-secondary" @onclick="() =>GoToCustomers()">Cancel</button>
+</EditForm>
+
+@code {
+    [Parameter] public Guid id { get; set; }
+    private Customer customer = new Customer();
+    private bool editFormIsValid = true;
+    protected override async Task OnInitializedAsync()
+    {
+        if (id !=Guid.Empty)
+        {
+            customer = await CustomerService.GetCustomer(id);
+        }
+    }
+
+    private async Task SaveCustomer()
+    {
+        if (customer.Id == Guid.Empty)
+            await CustomerService.CreateCustomer(customer);
+        else
+            await CustomerService.UpdateCustomer(customer);
+
+        Navigation.NavigateTo("/customers");
+    }
+    private void GoToCustomers()
+    {
+        Navigation.NavigateTo("/customers");
+    }
+    private void OnValidSubmit(EditContext context)
+    {
+        editFormIsValid = context.Validate();
+    }
+}

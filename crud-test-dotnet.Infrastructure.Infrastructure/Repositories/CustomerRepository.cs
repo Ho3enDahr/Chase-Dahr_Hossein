@@ -18,10 +18,6 @@ namespace crud_test_dotnet.Infrastructure.Infrastructure.Repositories
         {
             await _context.Customer.AddAsync(customer);
             await CommitAsync();
-            foreach (var @event in customer.GetEvents())
-            {
-                _eventStore.Save(@event);
-            }
             return customer;
 
         }
@@ -33,10 +29,7 @@ namespace crud_test_dotnet.Infrastructure.Infrastructure.Repositories
                 throw new Exception("customer not found");
              _context.Customer.Remove(customer);
             var res = await CommitAsync();
-            foreach (var @event in customer.GetEvents())
-            {
-                _eventStore.Save(@event);
-            }
+            
             return customer;
         }
 
@@ -59,11 +52,8 @@ namespace crud_test_dotnet.Infrastructure.Infrastructure.Repositories
         {
             _context.Customer.Update(customer);
             await CommitAsync();
-            foreach (var @event in customer.GetEvents())
-            {
-                _eventStore.Save(@event);
-            }
-            return  customer;
+
+            return customer;
         }
         public async Task<int> CommitAsync()
         {

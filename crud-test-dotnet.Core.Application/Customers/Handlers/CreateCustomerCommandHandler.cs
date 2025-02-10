@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace crud_test_dotnet.Core.Application.Customers.Handlers
 {
-    internal class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerCommand, Customer>
+    public class CreateCustomerCommandHandler : IRequestHandler<CreateCustomerCommand, Customer>
     {
         private readonly ICustomerRepository _customer;
         private readonly IEventStore _eventStore;

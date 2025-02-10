@@ -27,15 +27,29 @@ namespace crud_test_dotnet.Api.Controllers
             var customer = await _mediator.Send(command);
             return Ok(customer);
         }
-        [HttpDelete]
-        public async Task<IActionResult> DeleteCustomer([FromBody] DeleteCustomerCommand command)
+        [HttpDelete("DeleteCustomer")]
+        public async Task<IActionResult> DeleteCustomer([FromQuery]Guid id)
         {
+            DeleteCustomerCommand command = new DeleteCustomerCommand
+            {
+                Id = id
+            };
             var customer = await _mediator.Send(command);
             return Ok(customer);
         }
-        [HttpGet]
-        public async Task<IActionResult> GetCustomerById([FromBody] GetCustomerByIdQuery command)
+        [HttpGet("GetCustomerById")]
+        public async Task<IActionResult> GetCustomerById([FromQuery]Guid id)
         {
+            GetCustomerByIdQuery command = new GetCustomerByIdQuery(id);
+            
+            var customer = await _mediator.Send(command);
+            return Ok(customer);
+        }
+        [HttpGet("GetCustomers")]
+        public async Task<IActionResult> GetCustomers()
+        {
+            GetCustomersQuery command = new GetCustomersQuery();
+
             var customer = await _mediator.Send(command);
             return Ok(customer);
         }

@@ -22,12 +22,12 @@ namespace crud_test_dotnet.Infrastructure.Infrastructure.DBContext
         {
             modelBuilder.Entity<Customer>(opt => {
                 opt.HasKey(k => k.Id);
-                //opt.HasIndex(k => new {k.FirstName,k.LastName,k.Email}).IsUnique();
+                opt.HasIndex(k => new {k.FirstName,k.LastName,k.Email}).IsUnique();
                 opt.HasIndex(k => k.Id).IsUnique();
-               // opt.HasIndex(k => k.Email).IsUnique();
-                opt.Property(c => c.BankAccountNumber).HasConversion(bankAccount=>bankAccount.Value,value=>new BankAccountNumber(value)).HasMaxLength(10).HasColumnType("varchar(10)");
+                opt.HasIndex(k => k.Email).IsUnique();
+                opt.Property(c => c.BankAccountNumber).HasConversion(bankAccount=>bankAccount.Value,value=>new BankAccountNumber(value)).HasMaxLength(19).HasColumnType("varchar(19)");
                 opt.Property(c=>c.Email).HasConversion(email=>email.Value,value=>new Email(value)).HasMaxLength(100);
-                opt.Property(c => c.PhoneNumber).HasConversion(phone => phone.Value, value => new PhoneNumber(value)).HasMaxLength(10);
+                opt.Property(c => c.PhoneNumber).HasConversion(phone => phone.Value, value => new PhoneNumber(value)).HasMaxLength(20);
             });
             modelBuilder.Entity<EventStoreModel>(opt =>
             {
@@ -38,15 +38,5 @@ namespace crud_test_dotnet.Infrastructure.Infrastructure.DBContext
                 opt.Property(p => p.OccurredOn).IsRequired();
             });
         }
-        //public class CustomerConfiguration: EntityTypeConfiguration<Customer>
-        //{
-        //    internal CustomerConfiguration()
-        //    {
-        //        this.ToTable("Customer");
-        //        this.Property(x => x.Email.Value).HasColumnType("nvarchar(50)");
-        //        this.Property(x => x.PhoneNumber.Value).HasColumnType("nvarchar(10)");
-        //        this.Property(x => x.BankAccountNumber.Value).HasColumnType("nvarchar(10)");
-        //    }
-        //}
     }
 }
